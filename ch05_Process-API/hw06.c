@@ -13,10 +13,10 @@ main(int argc, char *argv[])
         exit(1);
     } else if (rc == 0) { // child
         printf("I am child (pid:%d)\n", (int) getpid());
-        int wc = waitpid(-1);
+        int wc = waitpid(-1, NULL, 0);
         printf("Child: waitpid(-1) returns %d\n", wc);
     } else { // parent
-        int wc = wait(rc);
+        int wc = waitpid(rc, NULL, 0);
         printf("Parent: waitpid(%d) returns %d\n", rc, wc);
     }
     return 0;
