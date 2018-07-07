@@ -13,9 +13,9 @@ main(int argc, char *argv[])
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if (rc == 0) { // child
-        write(fd, "I am child");
+        write(fd, "I am child\n");
     } else { // parent goes down this path (main)
-        write(fd, "I am parent");
+        write(fd, "I am parent\n");
     }
     return 0;
 }
