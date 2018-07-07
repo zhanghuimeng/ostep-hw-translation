@@ -14,10 +14,10 @@ main(int argc, char *argv[])
     } else if (rc == 0) { // child (new process)
         printf("I am child (pid:%d)\n", (int) getpid());
         int wc = wait(NULL);
-        printf("wait() returns %d\n", wc);
+        printf("Child: wait() returns %d\n", wc);
     } else { // parent goes down this path (main)
         int wc = wait(NULL);
-        printf("wait() returns %d\n", wc);
+        printf("Parent: wait() returns %d\n", wc);
     }
     return 0;
 }
