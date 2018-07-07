@@ -8,7 +8,8 @@
 int
 main(int argc, char *argv[])
 {
-    for (int i = 0; i < 6; i++) {
+    int i;
+    for (i = 0; i < 6; i++) {
         switch (i) {
         case 0:
             printf("Parent: ready for execl(const char *path, const char *arg, ... /* (char  *) NULL */)\n");
@@ -26,7 +27,7 @@ main(int argc, char *argv[])
             printf("Parent: ready for execvp(const char *file, char *const argv[])\n");
             break;
         case 5:
-            printf("Parent: ready for execvpe(const char *file, char *const argv[], char *const envp[])"\n");
+            printf("Parent: ready for execvpe(const char *file, char *const argv[], char *const envp[])\n");
             break;
         default:
             printf("Should not come here\n");
@@ -38,31 +39,38 @@ main(int argc, char *argv[])
             fprintf(stderr, "fork failed\n");
             exit(1);
         } else if (rc == 0) { // child
+            char *argv[] = {"ls", "/", NULL};
             switch (i) {
             case 0:
-                execl("/bin/ls", NULL);
+                execl("/bin/ls", "ls", "/", NULL);
+                exit(1);
                 break;
             case 1:
-                execlp("/bin/ls", NULL);
+                execlp("ls", "ls", "/", NULL);
+                exit(1);
                 break;
             case 2:
-                execle("/bin/ls", NULL);
+                execle("/bin/ls", "ls", "/", NULL, NULL);
+                exit(1);
                 break;
             case 3:
-                execv("/bin/ls", NULL);
+                execv("/bin/ls", argv);
+                exit(1);
                 break;
             case 4:
-                execvp("/bin/ls", NULL);
+                execvp("ls", argv);
+                exit(1);
                 break;
             case 5:
-                execvp("/bin/ls", NULL, NULL);
+                execvpe("ls", argv, NULL);
+                exit(1);
                 break;
             default:
                 printf("Should not come here\n");
                 exit(1);
             }
         } else { // parent goes down this path (main)
-            wait();
+            wait(NULL);
         }
     }
     return 0;
