@@ -1,5 +1,7 @@
 #include <unistd.h>  
-#include <stdio.h>  
+#include <stdio.h>
+#include <sys/wait.h>
+#include <stdlib.h>
   
 int main()  
 {  
@@ -7,7 +9,7 @@ int main()
     char buf[80];  
     pid_t pid;  
       
-    pipe(filedes);
+    pipe(pipefd);
     
     int rc[2];
     rc[0] = fork();
@@ -20,7 +22,7 @@ int main()
     else if (rc[0] == 0)  // child 1
     {  
         printf("Child 1 (pid=%d), writing to pipe.\n", (int) getpid());
-        char s[] = "Hello world , this is write by pipe.\n";
+        char s[] = "Hello world , this is transported by pipe.\n";
         write(pipefd[1], s, sizeof(s));
         close(pipefd[0]);
         close(pipefd[1]);
