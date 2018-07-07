@@ -14,10 +14,10 @@ main(int argc, char *argv[])
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if (rc == 0) { // child
-        printf("I am child\n");
+        printf("Hello, I am child\n");
     } else { // parent goes down this path (main)
         waitpid(rc);
-        printf("I am parent\n");
+        printf("Goodbye, I am parent\n");
     }
     return 0;
 }
