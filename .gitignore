@@ -1,6 +1,6 @@
-*
+!.gitignore
 !*.py
+!*.c
 !*.cpp
 !README
 !makefile
-
