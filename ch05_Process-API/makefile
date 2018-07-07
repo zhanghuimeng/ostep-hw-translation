@@ -1,4 +1,4 @@
-all: hw01 hw02 hw03 hw04 hw05 hw06
+all: hw01 hw02 hw03 hw04 hw05 hw06 hw07
 
 hw01: hw01.c
 	gcc hw01.c -o hw01
@@ -12,3 +12,5 @@ hw05: hw05.c
 	gcc hw05.c -o hw05
 hw06: hw06.c
 	gcc hw06.c -o hw06
+hw07: hw07.c
+	gcc hw07.c -o hw07
