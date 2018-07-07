@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <errno.h>
 
 int
 main(int argc, char *argv[])
@@ -15,9 +16,7 @@ main(int argc, char *argv[])
     } else if (rc == 0) { // child
         printf("I am child\n");
     } else { // parent goes down this path (main)
-        while ((kill(rc, 0) != ESRCH)) {
-            sleep(0);
-        }
+        waitpid(rc);
         printf("I am parent\n");
     }
     return 0;
