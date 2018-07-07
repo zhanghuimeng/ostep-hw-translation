@@ -13,9 +13,11 @@ main(int argc, char *argv[])
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if (rc == 0) { // child
-        write(fd, "I am child");
+        char str[] = "I am child\n";
+        write(fd, str, strlen(str));
     } else { // parent goes down this path (main)
-        write(fd, "I am parent");
+        char str[] = "I am parent\n";
+        write(fd, str, strlen(str));
     }
     return 0;
 }
